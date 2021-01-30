@@ -168,7 +168,11 @@ class _AnytimePodcastAppState extends State<AnytimePodcastApp> {
           const Locale('en', ''),
           const Locale('de', ''),
         ],
-        theme: theme,
+        theme: theme.copyWith(
+          textTheme: theme.textTheme.apply(fontFamily: 'IBMPlexSans'),
+          primaryTextTheme: theme.textTheme.apply(fontFamily: 'IBMPlexSans'),
+          accentTextTheme: theme.textTheme.apply(fontFamily: 'IBMPlexSans'),
+        ),
         home: AnytimeHomePage(title: 'Anytime Podcast Player'),
       ),
     );
