@@ -88,25 +88,28 @@ class _NowPlayingState extends State<NowPlaying> with WidgetsBindingObserver {
                       ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      snapshot.data == null
-                          ? Container()
-                          : Expanded(
-                              child: NowPlayingHeader(imageUrl: snapshot.data.imageUrl),
-                              flex: 6,
-                            ),
-                      Expanded(
-                        child: NowPlayingDetails(title: snapshot.data.title, description: snapshot.data.description),
-                        flex: 4,
-                      ),
-                      SizedBox(
-                        height: 160.0,
-                        child: NowPlayingTransport(duration: duration),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 36.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        snapshot.data == null
+                            ? Container()
+                            : Expanded(
+                                child: NowPlayingHeader(imageUrl: snapshot.data.imageUrl),
+                                flex: 8,
+                              ),
+                        Expanded(
+                          child: NowPlayingDetails(title: snapshot.data.title, description: snapshot.data.description),
+                          flex: 4,
+                        ),
+                        SizedBox(
+                          height: 160.0,
+                          child: NowPlayingTransport(duration: duration),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

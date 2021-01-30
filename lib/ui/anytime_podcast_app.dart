@@ -238,6 +238,14 @@ class _AnytimeHomePageState extends State<AnytimeHomePage> with WidgetsBindingOb
               slivers: <Widget>[
                 SliverAppBar(
                   title: TitleWidget(),
+                  backwardsCompatibility: false,
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarIconBrightness:
+                        Theme.of(context).brightness == Brightness.light
+                            ? Brightness.dark
+                            : Brightness.light,
+                    statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                  ),
                   brightness: brightness,
                   backgroundColor: backgroundColour,
                   floating: false,
@@ -301,15 +309,18 @@ class _AnytimeHomePageState extends State<AnytimeHomePage> with WidgetsBindingOb
               onTap: pager.changePage,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.library_music),
+                  icon: Icon(Icons.library_music_outlined),
+                  activeIcon: Icon(Icons.library_music),
                   label: L.of(context).library,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.explore),
+                  icon: Icon(Icons.explore_outlined),
+                  activeIcon: Icon(Icons.explore),
                   label: L.of(context).discover,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.file_download),
+                  icon: Icon(Icons.download_outlined),
+                  activeIcon: Icon(Icons.file_download),
                   label: L.of(context).downloads,
                 ),
               ],

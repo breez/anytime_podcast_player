@@ -36,7 +36,7 @@ class _LibraryState extends State<Library> {
                       Icon(
                         Icons.headset,
                         size: 75,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).primaryColorLight,
                       ),
                       Text(
                         L.of(context).no_subscriptions_message,

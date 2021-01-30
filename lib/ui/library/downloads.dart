@@ -94,7 +94,7 @@ class _DownloadsState extends State<Downloads> {
               Icon(
                 Icons.cloud_download,
                 size: 75,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColorLight,
               ),
               Text(
                 L.of(context).no_downloads_message,

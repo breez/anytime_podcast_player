@@ -86,7 +86,7 @@ class _PlayerTransportControlsState extends State<PlayerTransportControls> with 
                   icon: Icon(
                     Icons.replay_30,
                     size: 48.0,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).buttonColor,
                   ),
                 ),
                 Tooltip(
@@ -100,7 +100,7 @@ class _PlayerTransportControlsState extends State<PlayerTransportControls> with 
                       }
                     },
                     shape: CircleBorder(side: BorderSide(color: Theme.of(context).highlightColor, width: 0.0)),
-                    color: Theme.of(context).brightness == Brightness.light ? Colors.orange : Colors.grey[800],
+                    color: Theme.of(context).buttonColor,
                     padding: const EdgeInsets.all(8.0),
                     child: AnimatedIcon(
                       size: 60.0,
@@ -118,7 +118,7 @@ class _PlayerTransportControlsState extends State<PlayerTransportControls> with 
                   icon: Icon(
                     Icons.forward_30,
                     size: 48.0,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).buttonColor,
                   ),
                 ),
               ],

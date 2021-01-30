@@ -73,7 +73,7 @@ class EpisodeTile extends StatelessWidget {
                             BasicDialogAction(
                               title: Text(
                                 L.of(context).cancel_button_label,
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(color: Theme.of(context).primaryColorLight),
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
@@ -82,7 +82,7 @@ class EpisodeTile extends StatelessWidget {
                             BasicDialogAction(
                               title: Text(
                                 L.of(context).delete_button_label,
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(color: Theme.of(context).primaryColorLight),
                               ),
                               onPressed: () {
                                 bloc.deleteDownload(episode);
@@ -177,7 +177,7 @@ class EpisodeTile extends StatelessWidget {
           Container(
             height: 4.0,
             width: 56.0 * (episode.percentagePlayed / 100),
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColorLight.withGreen(255),
           ),
         ],
       ),

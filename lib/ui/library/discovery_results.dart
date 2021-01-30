@@ -49,7 +49,7 @@ class DiscoveryResults extends StatelessWidget {
                     Icon(
                       Icons.search,
                       size: 75,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).primaryColorLight,
                     ),
                     Text(
                       L.of(context).no_search_results_message,
