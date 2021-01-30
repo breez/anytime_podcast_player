@@ -90,7 +90,7 @@ ThemeData _buildDarktheme() {
     textTheme: Typography.material2018(platform: TargetPlatform.android).white,
     accentTextTheme: Typography.material2018(platform: TargetPlatform.android).white,
     primaryIconTheme: IconThemeData(color: Colors.white),
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: IconThemeData(color: Colors.white, size: 32.0),
     dividerTheme: base.dividerTheme.copyWith(
       color: Color(0xff444444),
     ),
