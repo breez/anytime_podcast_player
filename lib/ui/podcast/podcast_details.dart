@@ -305,7 +305,12 @@ class PodcastTitle extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 16.0),
           ),
-          Text(podcast.description ?? '', style: textTheme.bodyText1),
+          Text(
+            podcast.description ?? '',
+            style: textTheme.bodyText1
+                .copyWith(fontSize: 14.3, letterSpacing: 0.2, height: 1.1),
+            strutStyle: StrutStyle(fontSize: 14.3, height: 1.2),
+          ),
           Padding(
             padding: EdgeInsets.only(top: 16.0),
           ),
