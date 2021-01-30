@@ -93,12 +93,12 @@ class _DownloadsState extends State<Downloads> {
             children: <Widget>[
               Icon(
                 Icons.cloud_download,
-                size: 75,
+                size: 48,
                 color: Theme.of(context).primaryColorLight,
               ),
               Text(
                 L.of(context).no_downloads_message,
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline6.copyWith(fontFamily: 'IBMPlexSans', fontWeight: FontWeight.w400, fontSize: 14.3),
                 textAlign: TextAlign.center,
               ),
             ],

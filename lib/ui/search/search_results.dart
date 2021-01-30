@@ -46,12 +46,12 @@ class SearchResults extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.search,
-                      size: 75,
+                      size: 48,
                       color: Theme.of(context).primaryColorLight,
                     ),
                     Text(
                       L.of(context).no_search_results_message,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.headline6.copyWith(fontFamily: 'IBMPlexSans', fontWeight: FontWeight.w400, fontSize: 14.3),
                       textAlign: TextAlign.center,
                     ),
                   ],
