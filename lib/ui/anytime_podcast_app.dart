@@ -303,6 +303,7 @@ class _AnytimeHomePageState extends State<AnytimeHomePage> with WidgetsBindingOb
               type: BottomNavigationBarType.fixed,
               backgroundColor: Theme.of(context).bottomAppBarColor,
               selectedIconTheme: Theme.of(context).iconTheme,
+              unselectedItemColor: Theme.of(context).unselectedWidgetColor,
               currentIndex: snapshot.data,
               onTap: pager.changePage,
               items: <BottomNavigationBarItem>[
