@@ -243,6 +243,14 @@ class _AnytimeHomePageState extends State<AnytimeHomePage> with WidgetsBindingOb
                   visible: widget.topBarVisible,
                   sliver: SliverAppBar(
                     title: TitleWidget(),
+                    backwardsCompatibility: false,
+                    systemOverlayStyle: SystemUiOverlayStyle(
+                      statusBarIconBrightness:
+                      Theme.of(context).brightness == Brightness.light
+                          ? Brightness.dark
+                          : Brightness.light,
+                      statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                    ),
                     brightness: brightness,
                     backgroundColor: backgroundColour,
                     floating: false,

@@ -17,6 +17,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -132,6 +133,14 @@ class _PodcastDetailsState extends State<PodcastDetails> {
             controller: _sliverScrollController,
             slivers: <Widget>[
               SliverAppBar(
+                backwardsCompatibility: false,
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarIconBrightness:
+                  Theme.of(context).brightness == Brightness.light
+                      ? Brightness.dark
+                      : Brightness.light,
+                  statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                ),
                 brightness: brightness,
                 title: AnimatedOpacity(
                   opacity: toolbarCollpased ? 1.0 : 0.0,
