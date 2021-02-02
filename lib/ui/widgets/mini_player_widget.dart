@@ -170,7 +170,7 @@ class _MiniPlayerBuilderState extends State<_MiniPlayerBuilder> with SingleTicke
                               child: AnimatedIcon(
                                 size: 48.0,
                                 icon: AnimatedIcons.play_pause,
-                                color: Theme.of(context).buttonColor,
+                                color: Theme.of(context).accentColor,
                                 progress: _playPauseController,
                               ),
                             );
