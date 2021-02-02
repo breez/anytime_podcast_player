@@ -101,7 +101,7 @@ class _DownloadsState extends State<Downloads> {
             children: <Widget>[
               Icon(
                 Icons.cloud_download,
-                size: 75,
+                size: 45,
                 color: Theme.of(context).primaryColor,
               ),
               Text(

@@ -39,7 +39,7 @@ class _LibraryState extends State<Library> {
                     children: <Widget>[
                       Icon(
                         Icons.headset,
-                        size: 75,
+                        size: 45,
                         color: Theme.of(context).primaryColor,
                       ),
                       Text(

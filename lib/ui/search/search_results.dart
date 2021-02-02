@@ -46,7 +46,7 @@ class SearchResults extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.search,
-                      size: 75,
+                      size: 45,
                       color: Theme.of(context).primaryColor,
                     ),
                     Text(

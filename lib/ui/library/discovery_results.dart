@@ -48,7 +48,7 @@ class DiscoveryResults extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.search,
-                      size: 75,
+                      size: 48,
                       color: Theme.of(context).primaryColor,
                     ),
                     Text(
