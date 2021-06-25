@@ -74,6 +74,8 @@ class _PodcastDetailsState extends State<PodcastDetails> {
         });
       }
     });
+
+    _handleRefresh();
   }
 
   @override
