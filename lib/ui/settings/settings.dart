@@ -91,18 +91,7 @@ class _SettingsState extends State<Settings> {
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backwardsCompatibility: false,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
-          statusBarColor: Colors.transparent,
-        ),
-        brightness: Theme.of(context).brightness,
-        elevation: 0.0,
-        title: Text(
-          'Settings',
-        ),
-      ),
+      appBar: AppBar(elevation: 0.0, title: Text('Settings')),
       body: _buildList(context),
     );
   }

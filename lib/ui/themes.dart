@@ -97,6 +97,7 @@ ThemeData _buildDarktheme() {
     sliderTheme: SliderThemeData().copyWith(valueIndicatorColor: Color(0xff222222)),
     appBarTheme: base.appBarTheme.copyWith(
       backgroundColor: Color(0xff222222),
+      foregroundColor: Colors.white,
       shadowColor: Color(0xff222222),
       elevation: 1.0,
     ),

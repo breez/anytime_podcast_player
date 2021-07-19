@@ -47,8 +47,8 @@ class _PodcastDetailsState extends State<PodcastDetails> {
   final log = Logger('PodcastDetails');
   final ScrollController _sliverScrollController = ScrollController();
   var brightness = Brightness.dark;
+  bool toolbarCollapsed = false;
   SystemUiOverlayStyle _systemOverlayStyle;
-  bool toolbarCollpased = false;
 
   @override
   void initState() {
@@ -62,15 +62,19 @@ class _PodcastDetailsState extends State<PodcastDetails> {
     // collapsed state. Add a listener and set toollbarCollapsed variable
     // as required. The text display property is then based on this boolean.
     _sliverScrollController.addListener(() {
-      if (!toolbarCollpased && _sliverScrollController.hasClients && _sliverScrollController.offset > (300 - kToolbarHeight)) {
+      if (!toolbarCollapsed &&
+          _sliverScrollController.hasClients &&
+          _sliverScrollController.offset > (300 - kToolbarHeight)) {
         setState(() {
-          toolbarCollpased = true;
+          toolbarCollapsed = true;
+          _updateSystemOverlayStyle();
         });
-      } else if (toolbarCollpased &&
+      } else if (toolbarCollapsed &&
           _sliverScrollController.hasClients &&
           _sliverScrollController.offset < (300 - kToolbarHeight)) {
         setState(() {
-          toolbarCollpased = false;
+          toolbarCollapsed = false;
+          _updateSystemOverlayStyle();
         });
       }
     });
@@ -86,7 +90,7 @@ class _PodcastDetailsState extends State<PodcastDetails> {
   void didChangeDependencies() {
     _systemOverlayStyle = SystemUiOverlayStyle(
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
-      statusBarColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(toolbarCollpased ? 1.0 : 0.5),
+      statusBarColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(toolbarCollapsed ? 1.0 : 0.5),
     );
     super.didChangeDependencies();
   }
@@ -114,6 +118,15 @@ class _PodcastDetailsState extends State<PodcastDetails> {
     });
   }
 
+  void _updateSystemOverlayStyle() {
+    setState(() {
+      _systemOverlayStyle = SystemUiOverlayStyle(
+        statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        statusBarColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(toolbarCollapsed ? 1.0 : 0.5),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final placeholderBuilder = PlaceholderBuilder.of(context);
@@ -135,18 +148,14 @@ class _PodcastDetailsState extends State<PodcastDetails> {
               SliverAppBar(
                 backwardsCompatibility: false,
                 systemOverlayStyle: _systemOverlayStyle,
-                brightness: toolbarCollpased ? Theme.of(context).brightness : Brightness.dark,
                 title: AnimatedOpacity(
-                  opacity: toolbarCollpased ? 1.0 : 0.0,
-                  duration: Duration(milliseconds: 500),
-                  child: Text(widget.podcast.title),
-                ),
+                    opacity: toolbarCollapsed ? 1.0 : 0.0,
+                    duration: Duration(milliseconds: 500),
+                    child: Text(widget.podcast.title)),
                 leading: DecoratedIconButton(
                   icon: Icons.close,
-                  iconColour: toolbarCollpased && Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).appBarTheme.foregroundColor
-                      : Colors.white,
-                  decorationColour: toolbarCollpased ? Color(0x00000000) : Color(0x22000000),
+                  iconColour: toolbarCollapsed && Theme.of(context).brightness == Brightness.light ? Theme.of(context).appBarTheme.foregroundColor : Colors.white,
+                  decorationColour: toolbarCollapsed ? Color(0x00000000) : Color(0x22000000),
                   onPressed: () {
                     _resetSystemOverlayStyle();
                     Navigator.pop(context);

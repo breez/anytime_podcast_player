@@ -247,101 +247,100 @@ class _AnytimeHomePageState extends State<AnytimeHomePage> {
     final pager = Provider.of<PagerBloc>(context);
     var settings = Provider.of<SettingsBloc>(context).currentSettings;
     final backgroundColour = Theme.of(context).scaffoldBackgroundColor;
-    final brightness = Theme.of(context).brightness;
 
-    return Scaffold(
-      backgroundColor: backgroundColour,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverVisibility(
-                  visible: widget.topBarVisible,
-                  sliver: SliverAppBar(
-                    title: TitleWidget(),
-                    backwardsCompatibility: false,
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarIconBrightness:
-                          Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
-                      statusBarColor: Colors.transparent,
-                    ),
-                    brightness: brightness,
-                    backgroundColor: backgroundColour,
-                    floating: false,
-                    pinned: true,
-                    snap: false,
-                    actions: <Widget>[
-                      IconButton(
-                        tooltip: L.of(context).search_button_label,
-                        icon: Icon(Icons.search),
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            SlideRightRoute(widget: Search()),
-                          );
-                        },
-                      ),
-                      PopupMenuButton<String>(
-                        color: Theme.of(context).dialogBackgroundColor,
-                        onSelected: _menuSelect,
-                        icon: Icon(
-                          Icons.more_vert,
-                        ),
-                        itemBuilder: (BuildContext context) {
-                          return <PopupMenuEntry<String>>[
-                            PopupMenuItem<String>(
-                              textStyle: Theme.of(context).textTheme.subtitle1,
-                              value: 'rss',
-                              child: Text(L.of(context).add_rss_feed_option),
-                            ),
-                            PopupMenuItem<String>(
-                              textStyle: Theme.of(context).textTheme.subtitle1,
-                              value: 'settings',
-                              child: Text(L.of(context).settings_label),
-                            ),
-                            PopupMenuItem<String>(
-                              textStyle: Theme.of(context).textTheme.subtitle1,
-                              value: 'about',
-                              child: Text(L.of(context).about_label),
-                            ),
-                          ];
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                StreamBuilder<int>(
-                    stream: pager.currentPage,
-                    builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                      return _fragment(snapshot.data, settings.searchProvider);
-                    }),
-              ],
-            ),
-          ),
-          MiniPlayer(),
-        ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarColor: Theme.of(context).bottomAppBarColor,
+        statusBarColor: Colors.transparent,
       ),
-      bottomNavigationBar: SizedBox(
-        height: 64,
-        child: StreamBuilder<int>(
-            stream: pager.currentPage,
-            initialData: 0,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-              var selectedItemColor = Theme.of(context).iconTheme.color;
-              var unselectedItemColor = HSLColor.fromColor(Theme.of(context).bottomAppBarColor).withLightness(0.85).toColor();
-              return BottomNavigationBar(
-                elevation: Theme.of(context).bottomAppBarTheme.elevation,
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Theme.of(context).bottomAppBarColor,
-                selectedIconTheme: Theme.of(context).iconTheme,
-                selectedItemColor: Theme.of(context).iconTheme.color,
-                unselectedItemColor: HSLColor.fromColor(Theme.of(context).bottomAppBarColor).withLightness(0.85).toColor(),
-                currentIndex: snapshot.data,
-                onTap: pager.changePage,
-                items: _buildNavBarItems(unselectedItemColor, selectedItemColor, context, settings),
-              );
-            }),
+      child: Scaffold(
+        backgroundColor: backgroundColour,
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverVisibility(
+                    visible: widget.topBarVisible,
+                    sliver: SliverAppBar(
+                      title: TitleWidget(),
+                      backgroundColor: backgroundColour,
+                      floating: false,
+                      pinned: true,
+                      snap: false,
+                      actions: <Widget>[
+                        IconButton(
+                          tooltip: L.of(context).search_button_label,
+                          icon: Icon(Icons.search),
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              SlideRightRoute(widget: Search()),
+                            );
+                          },
+                        ),
+                        PopupMenuButton<String>(
+                          color: Theme.of(context).dialogBackgroundColor,
+                          onSelected: _menuSelect,
+                          icon: Icon(
+                            Icons.more_vert,
+                          ),
+                          itemBuilder: (BuildContext context) {
+                            return <PopupMenuEntry<String>>[
+                              PopupMenuItem<String>(
+                                textStyle: Theme.of(context).textTheme.subtitle1,
+                                value: 'rss',
+                                child: Text(L.of(context).add_rss_feed_option),
+                              ),
+                              PopupMenuItem<String>(
+                                textStyle: Theme.of(context).textTheme.subtitle1,
+                                value: 'settings',
+                                child: Text(L.of(context).settings_label),
+                              ),
+                              PopupMenuItem<String>(
+                                textStyle: Theme.of(context).textTheme.subtitle1,
+                                value: 'about',
+                                child: Text(L.of(context).about_label),
+                              ),
+                            ];
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  StreamBuilder<int>(
+                      stream: pager.currentPage,
+                      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                        return _fragment(snapshot.data, settings.searchProvider);
+                      }),
+                ],
+              ),
+            ),
+            MiniPlayer(),
+          ],
+        ),
+        bottomNavigationBar: SizedBox(
+          height: 64,
+          child: StreamBuilder<int>(
+              stream: pager.currentPage,
+              initialData: 0,
+              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                var selectedItemColor = Theme.of(context).iconTheme.color;
+                var unselectedItemColor = HSLColor.fromColor(Theme.of(context).bottomAppBarColor).withLightness(0.85).toColor();
+                return BottomNavigationBar(
+                  elevation: Theme.of(context).bottomAppBarTheme.elevation,
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: Theme.of(context).bottomAppBarColor,
+                  selectedIconTheme: Theme.of(context).iconTheme,
+                  selectedItemColor: Theme.of(context).iconTheme.color,
+                  unselectedItemColor: HSLColor.fromColor(Theme.of(context).bottomAppBarColor).withLightness(0.85).toColor(),
+                  currentIndex: snapshot.data,
+                  onTap: pager.changePage,
+                  items: _buildNavBarItems(unselectedItemColor, selectedItemColor, context, settings),
+                );
+              }),
+        ),
       ),
     );
   }

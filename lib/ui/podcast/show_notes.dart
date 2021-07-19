@@ -24,47 +24,49 @@ class ShowNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return Scaffold(
-        body: CustomScrollView(controller: _sliverScrollController, slivers: <Widget>[
-      SliverAppBar(
-        backwardsCompatibility: false,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
-          statusBarColor: Colors.transparent,
-        ),
-        brightness: Theme.of(context).brightness,
-        title: Text(episode.podcast),
-        floating: false,
-        iconTheme: Theme.of(context).iconTheme.copyWith(color: Theme.of(context).appBarTheme.foregroundColor),
-        pinned: true,
-        snap: false,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarColor: Theme.of(context).dialogBackgroundColor,
+        statusBarColor: Colors.transparent,
       ),
-      SliverToBoxAdapter(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-              child: Text(episode.title ?? '', style: textTheme.headline6),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-              child: Html(
-                data: episode.description,
-                style: {
-                  'html': Style(
-                    fontSize: FontSize.large,
-                  ),
-                },
-                onLinkTap: (url, context, attributes, element) {
-                  canLaunch(url).then((value) => launch(url));
-                },
+      child: Scaffold(
+          body: CustomScrollView(controller: _sliverScrollController, slivers: <Widget>[
+        SliverAppBar(
+          brightness: Theme.of(context).brightness,
+          title: Text(episode.podcast),
+          floating: false,
+          iconTheme: Theme.of(context).iconTheme.copyWith(color: Theme.of(context).appBarTheme.foregroundColor),
+          pinned: true,
+          snap: false,
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+                child: Text(episode.title ?? '', style: textTheme.headline6),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                child: Html(
+                  data: episode.description,
+                  style: {
+                    'html': Style(
+                      fontSize: FontSize.large,
+                    ),
+                  },
+                  onLinkTap: (url, context, attributes, element) {
+                    canLaunch(url).then((value) => launch(url));
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    ]));
+      ])),
+    );
   }
 }
